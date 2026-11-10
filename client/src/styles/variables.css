@@ -1,0 +1,81 @@
+/* ==========================================================================
+   ANUBHUTI GROUP DESIGN SYSTEM (EXACT REFERENCE TOKENS)
+   Extracted directly from https://anubhuti-group-of-companies12.vercel.app/
+   ========================================================================== */
+:root {
+  /* Core Brand Palette */
+  --bg: #FAF7F2;            /* page background, warm ivory */
+  --surface: #FFFFFF;       /* cards, forms, modals, navbar */
+  --primary: #1F3D36;       /* headings, navbar text, footer background, main buttons */
+  --accent: #B8935A;        /* small highlights only: labels, accents, counters */
+  --tint: #E7EEE9;          /* alternate section backgrounds, badges, soft buttons */
+  --text: #1E2A27;          /* body text */
+  --muted: #66706B;         /* secondary text, captions */
+
+  /* Derived Interactive States & Variations */
+  --primary-hover: #2A5249; /* slightly lighter primary */
+  --primary-soft: rgba(31, 61, 54, 0.08);
+  --primary-overlay: rgba(31, 61, 54, 0.45); /* soft translucent overlay */
+  --primary-overlay-deep: rgba(31, 61, 54, 0.72);
+  
+  --accent-hover: #A07C44;  /* slightly darker accent */
+  --accent-soft: rgba(184, 147, 90, 0.15);
+  --accent-glow: rgba(184, 147, 90, 0.35);
+
+  --border: #E3DDD4;        /* very light warm gray-beige, 1px */
+  --border-subtle: #ECE7DE;
+  --border-accent: rgba(184, 147, 90, 0.40);
+  --border-footer: rgba(250, 247, 242, 0.15);
+
+  /* Elevation Shadows */
+  --shadow: 0 4px 16px rgba(31, 61, 54, 0.08);
+  --shadow-xs: 0 1px 4px rgba(31, 61, 54, 0.05);
+  --shadow-sm: 0 2px 8px rgba(31, 61, 54, 0.06);
+  --shadow-md: 0 6px 18px rgba(31, 61, 54, 0.08);
+  --shadow-lg: 0 12px 28px rgba(31, 61, 54, 0.09);
+  --shadow-xl: 0 18px 40px rgba(31, 61, 54, 0.12);
+  --shadow-accent: 0 6px 20px rgba(184, 147, 90, 0.25);
+
+  /* Division Badge Subtle Tints */
+  --tint-construction: #EAE6DF;
+  --tint-realtor: #E2ECE9;
+  --tint-interiors: #EDE7E0;
+
+  /* Functional & System Colors */
+  --white: #FFFFFF;
+  --star: #E5A93C;
+  --error: #C0392B;
+  --error-bg: #FDEDEC;
+  --success: #1E824C;
+  --success-bg: #EAF7EE;
+  --whatsapp: #25D366;
+  --whatsapp-shadow: rgba(37, 211, 102, 0.35);
+  --modal-backdrop: rgba(31, 61, 54, 0.70);
+  --lightbox-backdrop: rgba(17, 33, 29, 0.94);
+  --btn-shine: rgba(255, 255, 255, 0.35);
+  --card-sheen: rgba(255, 255, 255, 0.45);
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+
+  /* Borders & Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Layout */
+  --container-max: 1260px;
+  --header-height: 84px;
+  --topbar-height: 40px;
+}
+
