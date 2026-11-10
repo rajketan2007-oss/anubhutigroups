@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const TestimonialSlider = ({ testimonials = [] }) => {
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     if (testimonials.length <= 1) return;
@@ -22,19 +24,43 @@ const TestimonialSlider = ({ testimonials = [] }) => {
     setCurrent((prev) => (prev + 1) % testimonials.length);
   };
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 45 && touchEndX.current > 0) {
+      // Swiped Left -> Next
+      nextSlide();
+    } else if (touchEndX.current - touchStartX.current > 45 && touchEndX.current > 0) {
+      // Swiped Right -> Prev
+      prevSlide();
+    }
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
   const active = testimonials[current];
 
   return (
     <div
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: 'relative',
         maxWidth: '850px',
         margin: '0 auto',
         backgroundColor: 'var(--surface)',
         borderRadius: 'var(--radius-xl)',
-        padding: '3rem 2.5rem',
+        padding: 'clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 3.5vw, 2.5rem)',
         boxShadow: 'var(--shadow-lg)',
         border: '1px solid var(--border)',
+        touchAction: 'pan-y',
       }}
     >
       {/* Decorative Luxury Quote Icon */}

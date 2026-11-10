@@ -14,7 +14,7 @@ const PageHero = ({
     <section
       style={{
         position: 'relative',
-        padding: '5.5rem 0 4.5rem',
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 0 clamp(2.5rem, 5vw, 4.5rem)',
         backgroundColor: 'var(--primary)',
         color: 'var(--white)',
         overflow: 'hidden',

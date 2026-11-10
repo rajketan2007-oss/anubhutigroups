@@ -140,7 +140,7 @@ const PropertyCard = ({ property }) => {
         <button
           type="button"
           className="btn btn-outline btn-sm"
-          style={{ width: '100%', borderColor: 'var(--primary)' }}
+          style={{ width: '100%', borderColor: 'var(--primary)', minHeight: '44px' }}
           onClick={() => openQuoteModal('Realtor')}
         >
           <span>Inquire & Schedule Site Visit</span>

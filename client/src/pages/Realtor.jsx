@@ -176,7 +176,7 @@ const Realtor = () => {
           ========================================================================= */}
       <section
         style={{
-          marginTop: '-3rem',
+          marginTop: 'clamp(-3rem, -2.5vw, -1.25rem)',
           position: 'relative',
           zIndex: 10,
           marginBottom: '2rem',
@@ -187,7 +187,7 @@ const Realtor = () => {
             style={{
               backgroundColor: 'var(--surface)',
               borderRadius: 'var(--radius-xl)',
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3.5vw, 2rem)',
               boxShadow: 'var(--shadow-xl)',
               border: '1.5px solid var(--border-accent)',
             }}

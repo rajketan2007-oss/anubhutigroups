@@ -344,6 +344,8 @@ const AdminDashboard = () => {
             borderBottom: '2px solid var(--border)',
             marginBottom: '2rem',
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            paddingBottom: '2px',
           }}
         >
           {[
@@ -455,7 +457,7 @@ const AdminDashboard = () => {
                 <p style={{ color: 'var(--muted)', margin: 0 }}>No client inquiry records match the active criteria.</p>
               </div>
             ) : (
-              <div style={{ backgroundColor: 'var(--surface)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', overflowX: 'auto' }}>
+              <div style={{ backgroundColor: 'var(--surface)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
                   <thead>
                     <tr style={{ backgroundColor: 'var(--tint)', borderBottom: '1px solid var(--border)', color: 'var(--primary)' }}>

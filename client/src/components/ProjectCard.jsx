@@ -57,16 +57,17 @@ const ProjectCard = ({ project }) => {
             position: 'absolute',
             bottom: '1rem',
             right: '1rem',
-            width: '36px',
-            height: '36px',
+            width: '42px',
+            height: '42px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(31, 61, 54, 0.85)',
+            backgroundColor: 'rgba(31, 61, 54, 0.9)',
             color: 'var(--white)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             backdropFilter: 'blur(4px)',
             transition: 'transform var(--transition-fast), background-color var(--transition-fast)',
+            touchAction: 'manipulation',
           }}
           aria-label={`View enlarged image of ${project.title}`}
           onMouseEnter={(e) => {

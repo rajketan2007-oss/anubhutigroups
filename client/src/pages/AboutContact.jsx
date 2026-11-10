@@ -404,8 +404,8 @@ const AboutContact = () => {
                       <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '2px' }}>
                         Direct Inquiries:
                       </strong>
-                      <a href="tel:+919876543210" style={{ color: 'var(--text)' }}>
-                        +91 [Phone Number: 98765 43210]
+                      <a href="tel:+918252109615" style={{ color: 'var(--text)' }}>
+                        +91 8252109615
                       </a>
                     </div>
                   </div>
@@ -466,7 +466,7 @@ const AboutContact = () => {
 
                 <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: '1rem' }}>
                   <a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/918252109615"
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-soft btn-sm"

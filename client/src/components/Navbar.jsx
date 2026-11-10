@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, MapPin, Menu, X, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, Menu, X, ArrowUpRight, ShieldCheck, MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 const Navbar = () => {
@@ -8,6 +8,10 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { openQuoteModal } = useModal();
   const location = useLocation();
+
+  // Touch swipe tracking for mobile drawer
+  const touchStartX = useRef(0);
+  const touchCurrentX = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +21,40 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when drawer is open on mobile
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [drawerOpen]);
+
   // Close drawer on route change
   useEffect(() => {
     setDrawerOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchCurrentX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    // If user swipes right by > 50px towards screen edge, close drawer
+    if (touchCurrentX.current - touchStartX.current > 50 && touchStartX.current > 0) {
+      setDrawerOpen(false);
+    }
+    touchStartX.current = 0;
+    touchCurrentX.current = 0;
+  };
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -39,7 +72,7 @@ const Navbar = () => {
           <div className="top-bar-contacts">
             <span className="top-bar-item">
               <Phone size={13} color="var(--accent)" />
-              <a href="tel:+919876543210">+91 [98765 43210]</a>
+              <a href="tel:+918252109615">+91 8252109615</a>
             </span>
             <span className="top-bar-item">
               <Mail size={13} color="var(--accent)" />
@@ -117,22 +150,28 @@ const Navbar = () => {
       />
 
       {/* Mobile Drawer */}
-      <aside className={`mobile-nav-drawer ${drawerOpen ? 'active' : ''}`}>
+      <aside
+        className={`mobile-nav-drawer ${drawerOpen ? 'active' : ''}`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="mobile-drawer-header">
           <div className="brand-logo">
-            <div className="brand-symbol" style={{ width: '36px', height: '36px', fontSize: '1.3rem' }}>A</div>
+            <div className="brand-symbol" style={{ width: '38px', height: '38px', minWidth: '38px', minHeight: '38px', fontSize: '1.4rem', borderRadius: '8px' }}>A</div>
             <div className="brand-text">
-              <span className="brand-title" style={{ fontSize: '1.15rem' }}>ANUBHUTI GROUP</span>
+              <span className="brand-title" style={{ fontSize: '1.15rem', whiteSpace: 'nowrap' }}>ANUBHUTI GROUP</span>
+              <span className="brand-subtitle" style={{ fontSize: '0.6rem', whiteSpace: 'nowrap' }}>CONSTRUCTION • REALTOR • INTERIORS</span>
             </div>
           </div>
           <button
             type="button"
             className="modal-close-btn"
-            style={{ position: 'static' }}
+            style={{ position: 'static', width: '40px', height: '40px' }}
             onClick={() => setDrawerOpen(false)}
             aria-label="Close navigation drawer"
           >
-            <X size={18} />
+            <X size={20} />
           </button>
         </div>
 
@@ -144,26 +183,49 @@ const Navbar = () => {
               className={({ isActive }) => `mobile-menu-link ${isActive ? 'active' : ''}`}
               end={item.path === '/'}
             >
-              {item.name}
+              <span>{item.name}</span>
+              <ArrowUpRight size={16} color="var(--accent)" />
             </NavLink>
           ))}
         </nav>
 
-        <div style={{ marginTop: 'auto', paddingTop: '2rem' }}>
+        <div style={{ marginTop: 'auto', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <button
             type="button"
             className="btn btn-gold btn-lg"
-            style={{ width: '100%' }}
+            style={{ width: '100%', minHeight: '48px' }}
             onClick={() => {
               setDrawerOpen(false);
               openQuoteModal('General');
             }}
           >
-            Request Consultation
+            Request Project Consultation
           </button>
-          <div style={{ marginTop: '1.5rem', fontSize: '0.82rem', color: 'var(--muted)', textAlign: 'center' }}>
-            Phone: +91 [98765 43210]<br />
-            Email: [info@anubhutigroup.com]
+
+          {/* Quick Contact Touch Links */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginTop: '0.25rem' }}>
+            <a
+              href="tel:+918252109615"
+              className="btn btn-soft btn-sm"
+              style={{ minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '0.85rem' }}
+            >
+              <Phone size={15} color="var(--accent)" />
+              <span>Call Us</span>
+            </a>
+            <a
+              href="https://wa.me/918252109615?text=Hello%20Anubhuti%20Group%2C%20I%20would%20like%20to%20inquire%20about%20your%20services."
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-soft btn-sm"
+              style={{ minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '0.85rem' }}
+            >
+              <MessageCircle size={15} color="var(--whatsapp)" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          <div style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'center', marginTop: '0.5rem' }}>
+            Corporate Tower, Delhi NCR • All Rights Reserved
           </div>
         </div>
       </aside>

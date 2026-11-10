@@ -25,7 +25,7 @@ const Footer = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '1.25rem', fontSize: '0.9rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#BAC7C1' }}>
                 <Phone size={15} color="var(--accent)" />
-                <a href="tel:+919876543210" style={{ color: '#BAC7C1' }}>+91 [98765 43210]</a>
+                <a href="tel:+918252109615" style={{ color: '#BAC7C1' }}>+91 8252109615</a>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#BAC7C1' }}>
                 <Mail size={15} color="var(--accent)" />

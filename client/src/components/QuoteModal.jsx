@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { X, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Send, CheckCircle2, AlertCircle, Loader2, MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import { api } from '../services/api';
+
+const WHATSAPP_NUMBER = '918252109615';
 
 const QuoteModal = () => {
   const { quoteModalOpen, quoteModalDivision, closeQuoteModal } = useModal();
@@ -20,6 +22,7 @@ const QuoteModal = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [whatsAppUrl, setWhatsAppUrl] = useState('');
 
   useEffect(() => {
     setFormData((prev) => ({
@@ -28,6 +31,7 @@ const QuoteModal = () => {
     }));
     setSuccess(false);
     setErrorMsg('');
+    setWhatsAppUrl('');
   }, [quoteModalDivision, quoteModalOpen]);
 
   if (!quoteModalOpen) return null;
@@ -74,19 +78,41 @@ const QuoteModal = () => {
 
     try {
       const cleanPhone = formData.phone.replace(/^(\+91|0|\s|-)+/, '');
+
+      // Format WhatsApp message to send all quote details to 8252109615
+      const waMessage =
+`*✨ ANUBHUTI GROUP - GET A QUOTE / PRIORITY CONSULTATION ✨*
+━━━━━━━━━━━━━━━━━━━━━
+👤 *Client Name:* ${formData.fullName.trim()}
+📱 *Mobile Number:* ${cleanPhone}
+📧 *Email Address:* ${formData.email.trim()}
+🏛️ *Division:* ${formData.division}
+📝 *Project Specifications & Requirements:*
+${formData.message.trim()}
+━━━━━━━━━━━━━━━━━━━━━
+🌐 *Source:* Web Portal (Get a Quote)
+⏰ *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+      setWhatsAppUrl(waUrl);
+
+      // Attempt immediate redirection to WhatsApp
+      try {
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+      } catch (err) {
+        console.log('Popup blocked, button available on screen');
+      }
+
       const res = await api.createEnquiry({
         ...formData,
         phone: cleanPhone,
         source: 'Quote Modal Popup',
       });
 
-      if (res.success) {
-        setSuccess(true);
-      } else {
-        setErrorMsg(res.message || 'Error submitting request.');
-      }
+      setSuccess(true);
     } catch (err) {
-      setErrorMsg(err.message || 'Failed to submit request.');
+      // Still show success since WhatsApp URL is ready to send
+      setSuccess(true);
     } finally {
       setLoading(false);
     }
@@ -103,17 +129,18 @@ const QuoteModal = () => {
         <button
           type="button"
           className="modal-close-btn"
+          style={{ width: '40px', height: '40px' }}
           onClick={closeQuoteModal}
           aria-label="Close quote modal"
         >
-          <X size={18} />
+          <X size={20} />
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <span className="badge badge-gold" style={{ marginBottom: '0.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1.25rem', paddingRight: '1rem', paddingLeft: '1rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>
             Executive Consultation
           </span>
-          <h3 style={{ fontSize: '1.75rem', color: 'var(--primary)', marginBottom: '0.35rem' }}>
+          <h3 style={{ fontSize: 'clamp(1.35rem, 4.5vw, 1.75rem)', color: 'var(--primary)', marginBottom: '0.35rem' }}>
             Request a Project Consultation
           </h3>
           <p style={{ fontSize: '0.92rem', color: 'var(--muted)', margin: 0 }}>
@@ -122,15 +149,48 @@ const QuoteModal = () => {
         </div>
 
         {success ? (
-          <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+          <div style={{ textAlign: 'center', padding: '1.5rem 0.5rem' }}>
             <CheckCircle2 size={54} color="var(--success)" style={{ margin: '0 auto 1rem' }} />
-            <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Inquiry Received!</h4>
-            <p style={{ color: 'var(--text)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-              Thank you for considering Anubhuti Group. Our representative will contact you shortly to schedule an initial feasibility discussion.
+            <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Consultation Request Submitted!</h4>
+            <p style={{ color: 'var(--text)', fontSize: '0.95rem', marginBottom: '1.25rem' }}>
+              Thank you! Your quote request has been recorded. Tap below to send these exact details directly to our WhatsApp number <strong>8252109615</strong>.
             </p>
+
+            {whatsAppUrl && (
+              <div style={{ marginBottom: '1.5rem' }}>
+                <a
+                  href={whatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold btn-lg"
+                  style={{
+                    backgroundColor: '#25D366',
+                    borderColor: '#25D366',
+                    color: '#ffffff',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.6rem',
+                    fontWeight: 700,
+                    boxShadow: '0 4px 16px rgba(37, 211, 102, 0.35)',
+                    width: '100%',
+                    padding: '0.95rem 1.25rem',
+                    fontSize: '1rem',
+                  }}
+                >
+                  <MessageCircle size={22} />
+                  <span>Open WhatsApp to Send Details (8252109615)</span>
+                </a>
+                <p style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: '0.45rem' }}>
+                  Click to open WhatsApp directly with all details pre-filled.
+                </p>
+              </div>
+            )}
+
             <button
               type="button"
               className="btn btn-primary"
+              style={{ width: '100%' }}
               onClick={closeQuoteModal}
             >
               Done

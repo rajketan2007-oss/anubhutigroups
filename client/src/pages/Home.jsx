@@ -84,7 +84,7 @@ const Home = () => {
           alignItems: 'center',
           backgroundColor: 'var(--primary)',
           color: 'var(--white)',
-          padding: '6rem 0',
+          padding: 'clamp(3.5rem, 7vw, 6rem) 0',
           overflow: 'hidden',
         }}
       >
@@ -138,7 +138,7 @@ const Home = () => {
               <strong>Anubhuti Interiors</strong>. Delivering landmark civil infrastructure, verified premium real estate, and bespoke turnkey interior spaces.
             </p>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            <div className="hero-cta-group" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
               <button
                 type="button"
                 className="btn btn-gold btn-lg"

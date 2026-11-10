@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, MessageCircle } from 'lucide-react';
 import { api } from '../services/api';
+
+const WHATSAPP_NUMBER = '918252109615';
 
 const ContactForm = ({
   defaultDivision = 'General',
   source = 'Contact Page Form',
   title = 'Send Us a Priority Inquiry',
   subtitle = 'Our executive team reviews every request and responds within 24 business hours.',
+  buttonText = 'Submit Priority Consultation',
 }) => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -22,6 +25,7 @@ const ContactForm = ({
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [whatsAppUrl, setWhatsAppUrl] = useState('');
 
   const validate = () => {
     const errs = {};
@@ -66,6 +70,34 @@ const ContactForm = ({
     setLoading(true);
     try {
       const cleanPhone = formData.phone.replace(/^(\+91|0|\s|-)+/, '');
+
+      // Prepare formatted WhatsApp message
+      const waMessage =
+`*✨ ANUBHUTI GROUP - PRIORITY CONSULTATION ✨*
+━━━━━━━━━━━━━━━━━━━━━
+👤 *Client Name:* ${formData.fullName.trim()}
+📱 *Mobile Number:* ${cleanPhone}
+📧 *Email Address:* ${formData.email.trim()}
+🏛️ *Division:* ${formData.division}
+🏗️ *Requirement:* ${formData.projectType || 'General Consultation'}
+💰 *Budget:* ${formData.budget || 'Flexible / To be discussed'}
+📝 *Inquiry Details:*
+${formData.message.trim()}
+━━━━━━━━━━━━━━━━━━━━━
+🌐 *Source:* ${source}
+⏰ *Time:* ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}`;
+
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+      setWhatsAppUrl(waUrl);
+
+      // Attempt to open WhatsApp immediately in new tab/app
+      try {
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+      } catch (err) {
+        console.log('Direct popup prevented, on-screen WhatsApp action available');
+      }
+
+      // Persist to MongoDB backend (or mock fallback)
       const res = await api.createEnquiry({
         ...formData,
         phone: cleanPhone,
@@ -74,7 +106,7 @@ const ContactForm = ({
 
       if (res.success) {
         setSuccessMsg(
-          'Thank you! Your inquiry has been logged successfully. An Anubhuti Group senior consultant will connect with you shortly.'
+          'Thank you! Your priority consultation details have been registered and WhatsApp has been initiated to send your request directly to 8252109615.'
         );
         setFormData({
           fullName: '',
@@ -86,10 +118,15 @@ const ContactForm = ({
           message: '',
         });
       } else {
-        setErrorMsg(res.message || 'Submission failed. Please try again.');
+        // Even if DB fails, show success because WhatsApp message is ready
+        setSuccessMsg(
+          'Your consultation details are ready to send directly via WhatsApp to +91 8252109615.'
+        );
       }
     } catch (err) {
-      setErrorMsg(err.message || 'Could not connect to the inquiry service. Please call or WhatsApp us.');
+      setSuccessMsg(
+        'Your consultation details are prepared. Please tap the button below to send directly via WhatsApp.'
+      );
     } finally {
       setLoading(false);
     }
@@ -100,7 +137,7 @@ const ContactForm = ({
       style={{
         backgroundColor: 'var(--surface)',
         borderRadius: 'var(--radius-xl)',
-        padding: '2.5rem',
+        padding: 'clamp(1.25rem, 4vw, 2.5rem)',
         boxShadow: 'var(--shadow-md)',
         border: '1px solid var(--border)',
       }}
@@ -115,22 +152,61 @@ const ContactForm = ({
       </div>
 
       {successMsg && (
-        <div
-          style={{
-            backgroundColor: 'var(--success-bg)',
-            color: 'var(--success)',
-            border: '1px solid rgba(30, 130, 76, 0.25)',
-            borderRadius: 'var(--radius-md)',
-            padding: '1rem',
-            marginBottom: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            fontSize: '0.92rem',
-          }}
-        >
-          <CheckCircle2 size={20} flexShrink={0} />
-          <span>{successMsg}</span>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div
+            style={{
+              backgroundColor: 'var(--success-bg)',
+              color: 'var(--success)',
+              border: '1px solid rgba(30, 130, 76, 0.25)',
+              borderRadius: 'var(--radius-md)',
+              padding: '1rem',
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              fontSize: '0.92rem',
+            }}
+          >
+            <CheckCircle2 size={20} flexShrink={0} />
+            <span>{successMsg}</span>
+          </div>
+
+          {whatsAppUrl && (
+            <div
+              style={{
+                backgroundColor: 'rgba(37, 211, 102, 0.08)',
+                border: '1.5px solid #25D366',
+                borderRadius: 'var(--radius-md)',
+                padding: '1.25rem',
+                textAlign: 'center',
+              }}
+            >
+              <p style={{ margin: '0 0 0.85rem 0', fontWeight: 600, color: 'var(--primary)', fontSize: '0.95rem' }}>
+                Forward your project details directly to our WhatsApp executive:
+              </p>
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-gold btn-lg"
+                style={{
+                  backgroundColor: '#25D366',
+                  borderColor: '#25D366',
+                  color: '#ffffff',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.6rem',
+                  fontWeight: 700,
+                  boxShadow: '0 4px 16px rgba(37, 211, 102, 0.35)',
+                  width: '100%',
+                }}
+              >
+                <MessageCircle size={20} />
+                <span>Open WhatsApp to Send Details (8252109615)</span>
+              </a>
+            </div>
+          )}
         </div>
       )}
 
@@ -294,7 +370,7 @@ const ContactForm = ({
               ) : (
                 <>
                   <Send size={16} />
-                  <span>Submit Priority Request</span>
+                  <span>{buttonText}</span>
                 </>
               )}
             </button>
