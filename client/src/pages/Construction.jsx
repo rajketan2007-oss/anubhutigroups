@@ -48,7 +48,7 @@ const Construction = () => {
   const filteredProjects =
     filter === 'All'
       ? projects
-      : projects.filter((p) => p.category.toLowerCase() === filter.toLowerCase());
+      : projects.filter((p) => (p.category || '').toLowerCase().includes(filter.toLowerCase()));
 
   const constructionServices = [
     {
@@ -160,8 +160,8 @@ const Construction = () => {
         badge="Civil & Structural Division"
         badgeClass="badge-construction"
         title="Engineering Monumental Legacies with Uncompromising Rigor"
-        subtitle="From high-load industrial logistics facilities to bespoke luxury residential estates, Anubhuti Construction delivers structural precision, certified materials, and punctual execution."
-        bgImage="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1920&q=80"
+        subtitle="From high-rise commercial corporate glass towers to contemporary residential enclaves and institutional campuses, Anubhuti Construction delivers structural precision, certified materials, and punctual execution."
+        bgImage="/images/construction/commercial-glass-facade-tower.jpg"
         breadcrumbs={[{ name: 'Anubhuti Construction', path: null }]}
       />
 
@@ -314,7 +314,7 @@ const Construction = () => {
               flexWrap: 'wrap',
             }}
           >
-            {['All', 'Commercial', 'Residential'].map((tab) => (
+            {['All', 'Commercial', 'Residential', 'Institutional'].map((tab) => (
               <button
                 key={tab}
                 type="button"
@@ -322,7 +322,7 @@ const Construction = () => {
                 className={`btn btn-sm ${filter === tab ? 'btn-primary' : 'btn-soft'}`}
                 style={{ minWidth: '110px' }}
               >
-                {tab === 'All' ? 'All Projects' : `${tab} Works`}
+                {tab === 'All' ? 'All Projects (5)' : `${tab} Works`}
               </button>
             ))}
           </div>

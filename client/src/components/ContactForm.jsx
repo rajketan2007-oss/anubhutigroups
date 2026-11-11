@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2, AlertCircle, Loader2, MessageCircle } from 'lucide-react';
 import { api } from '../services/api';
 
-const WHATSAPP_NUMBER = '918252109615';
+const WHATSAPP_NUMBER = '917908880693';
 
 const ContactForm = ({
   defaultDivision = 'General',
@@ -106,7 +106,7 @@ ${formData.message.trim()}
 
       if (res.success) {
         setSuccessMsg(
-          'Thank you! Your priority consultation details have been registered and WhatsApp has been initiated to send your request directly to 8252109615.'
+          'Thank you! Your priority consultation details have been registered and WhatsApp has been initiated to send your request directly to 7908880693.'
         );
         setFormData({
           fullName: '',
@@ -120,7 +120,7 @@ ${formData.message.trim()}
       } else {
         // Even if DB fails, show success because WhatsApp message is ready
         setSuccessMsg(
-          'Your consultation details are ready to send directly via WhatsApp to +91 8252109615.'
+          'Your consultation details are ready to send directly via WhatsApp to +91 7908880693.'
         );
       }
     } catch (err) {
@@ -203,7 +203,7 @@ ${formData.message.trim()}
                 }}
               >
                 <MessageCircle size={20} />
-                <span>Open WhatsApp to Send Details (8252109615)</span>
+                <span>Open WhatsApp to Send Details (7908880693)</span>
               </a>
             </div>
           )}

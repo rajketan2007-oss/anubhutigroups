@@ -358,6 +358,7 @@ const AboutContact = () => {
                 </h3>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', fontSize: '0.95rem' }}>
+                  {/* Kolkata Office */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                     <div
                       style={{
@@ -376,10 +377,37 @@ const AboutContact = () => {
                     </div>
                     <div>
                       <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '2px' }}>
-                        Corporate Address [Placeholder]:
+                        Kolkata Office:
                       </strong>
                       <span style={{ color: 'var(--text)', lineHeight: 1.6 }}>
-                        Anubhuti Corporate Tower, Level 8, Business Boulevard, Premier Business District, New Delhi / NCR, 110001, India.
+                        Salt Lake Sector 5, Kolkata, West Bengal, India.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Durgapur Office */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                    <div
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: 'var(--radius-md)',
+                        backgroundColor: 'var(--tint)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--accent)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <MapPin size={20} />
+                    </div>
+                    <div>
+                      <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '2px' }}>
+                        Durgapur Office:
+                      </strong>
+                      <span style={{ color: 'var(--text)', lineHeight: 1.6 }}>
+                        Sepco, Durgapur, West Bengal, India.
                       </span>
                     </div>
                   </div>
@@ -404,8 +432,8 @@ const AboutContact = () => {
                       <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '2px' }}>
                         Direct Inquiries:
                       </strong>
-                      <a href="tel:+918252109615" style={{ color: 'var(--text)' }}>
-                        +91 8252109615
+                      <a href="tel:+917908880693" style={{ color: 'var(--text)', fontWeight: 600 }}>
+                        +91 7908880693
                       </a>
                     </div>
                   </div>
@@ -430,8 +458,8 @@ const AboutContact = () => {
                       <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '2px' }}>
                         Official Email:
                       </strong>
-                      <a href="mailto:info@anubhutigroup.com" style={{ color: 'var(--text)' }}>
-                        [info@anubhutigroup.com]
+                      <a href="mailto:anubhutigroup@gmail.com" style={{ color: 'var(--text)', fontWeight: 600 }}>
+                        anubhutigroup@gmail.com
                       </a>
                     </div>
                   </div>
@@ -458,7 +486,7 @@ const AboutContact = () => {
                       </strong>
                       <span style={{ color: 'var(--text)' }}>
                         Monday – Saturday: 9:30 AM – 7:00 PM IST<br />
-                        Sunday: Site Visits by Prior Appointment
+                        Sunday: Site Visits & Pre-Registrations by Prior Appointment
                       </span>
                     </div>
                   </div>
@@ -466,14 +494,14 @@ const AboutContact = () => {
 
                 <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: '1rem' }}>
                   <a
-                    href="https://wa.me/918252109615"
+                    href="https://wa.me/917908880693"
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-soft btn-sm"
                     style={{ flex: 1 }}
                   >
                     <MessageCircle size={15} color="var(--whatsapp)" />
-                    <span>WhatsApp Direct</span>
+                    <span>WhatsApp Direct (+91 7908880693)</span>
                   </a>
                 </div>
               </div>

@@ -72,15 +72,15 @@ const Navbar = () => {
           <div className="top-bar-contacts">
             <span className="top-bar-item">
               <Phone size={13} color="var(--accent)" />
-              <a href="tel:+918252109615">+91 8252109615</a>
+              <a href="tel:+917908880693">+91 7908880693</a>
             </span>
             <span className="top-bar-item">
               <Mail size={13} color="var(--accent)" />
-              <a href="mailto:info@anubhutigroup.com">[info@anubhutigroup.com]</a>
+              <a href="mailto:anubhutigroup@gmail.com">anubhutigroup@gmail.com</a>
             </span>
             <span className="top-bar-item">
               <MapPin size={13} color="var(--accent)" />
-              <span>[Premier Business District, New Delhi / NCR]</span>
+              <span>Kolkata (Salt Lake Sector 5) • Durgapur (Sepco)</span>
             </span>
           </div>
           <div className="top-bar-social">
@@ -205,7 +205,7 @@ const Navbar = () => {
           {/* Quick Contact Touch Links */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginTop: '0.25rem' }}>
             <a
-              href="tel:+918252109615"
+              href="tel:+917908880693"
               className="btn btn-soft btn-sm"
               style={{ minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '0.85rem' }}
             >
@@ -213,7 +213,7 @@ const Navbar = () => {
               <span>Call Us</span>
             </a>
             <a
-              href="https://wa.me/918252109615?text=Hello%20Anubhuti%20Group%2C%20I%20would%20like%20to%20inquire%20about%20your%20services."
+              href="https://wa.me/917908880693?text=Hello%20Anubhuti%20Group%2C%20I%20would%20like%20to%20inquire%20about%20your%20services."
               target="_blank"
               rel="noreferrer"
               className="btn btn-soft btn-sm"
@@ -225,7 +225,7 @@ const Navbar = () => {
           </div>
 
           <div style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'center', marginTop: '0.5rem' }}>
-            Corporate Tower, Delhi NCR • All Rights Reserved
+            Kolkata (Salt Lake Sec 5) • Durgapur (Sepco) • All Rights Reserved
           </div>
         </div>
       </aside>

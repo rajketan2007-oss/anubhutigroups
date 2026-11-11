@@ -12,6 +12,13 @@ import {
   ChevronRight,
   Filter,
   CheckCircle,
+  Phone,
+  Mail,
+  MapPin,
+  Sparkles,
+  Clock,
+  ArrowRight,
+  MessageCircle,
 } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
@@ -19,9 +26,12 @@ import PropertyCard from '../components/PropertyCard';
 import FAQAccordion from '../components/FAQAccordion';
 import ContactForm from '../components/ContactForm';
 import Loader from '../components/Loader';
+import { useModal } from '../context/ModalContext';
 import { api } from '../services/api';
 
 const Realtor = () => {
+  const { openQuoteModal } = useModal();
+
   // Real Filter & Search States
   const [properties, setProperties] = useState([]);
   const [total, setTotal] = useState(0);
@@ -111,51 +121,51 @@ const Realtor = () => {
 
   const categoryCards = [
     {
-      type: 'Flat',
-      title: 'Luxury Flats & Penthouses',
-      count: 'High-Rise Residences',
-      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80',
-    },
-    {
       type: 'Villa',
-      title: 'Independent Villas',
-      count: 'Private Enclaves',
-      image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80',
+      title: 'Independent Luxury Villas',
+      count: 'Heritage Resort Enclaves',
+      image: '/images/realtor/heritage-resort-villa-night.jpg',
     },
     {
       type: 'Plot',
-      title: 'Residential Plots',
-      count: 'Gated Freehold Plots',
-      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+      title: 'Residential Plots & Enclaves',
+      count: 'Gated Freehold Land',
+      image: '/images/realtor/resort-estate-aerial-pool.jpg',
     },
     {
       type: 'Commercial',
       title: 'Commercial & Retail',
-      count: 'Offices & Showrooms',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      count: 'Offices & High-Street Tech Towers',
+      image: '/images/construction/commercial-webel-tower.jpg',
+    },
+    {
+      type: 'Flat',
+      title: 'Luxury Flats & Penthouses',
+      count: 'High-Rise Residences',
+      image: '/images/construction/residential-green-enclave-render.jpg',
     },
   ];
 
   const faqs = [
     {
-      question: 'Are all listed properties RERA-registered and title-verified?',
+      question: 'When is Anubhuti Realtor launching its flagship projects?',
       answer:
-        'Yes. Anubhuti Realtor strictly lists properties that have undergone our internal legal scrutiny. We verify chain deeds, encumbrance certificates, development authority sanctions, and RERA registration numbers.',
+        'Anubhuti Realtor is currently in its pre-launch phase for flagship resort villas, gated residential plots, and commercial suites in Kolkata (Salt Lake Sector 5) and Durgapur (Sepco). Pre-registered patrons receive exclusive priority pricing, preferred plot allocation, and VIP site visit invitations.',
     },
     {
-      question: 'Can you assist non-resident Indians (NRIs) in buying property in India?',
+      question: 'Are all upcoming properties RERA-registered and title-verified?',
+      answer:
+        'Yes. Anubhuti Realtor strictly deals in properties that have undergone our internal legal scrutiny. Every parcel undergoes 30-year chain title searches, encumbrance clearances, masterplan municipal sanctions, and RERA compliance before launch.',
+    },
+    {
+      question: 'Can you assist non-resident Indians (NRIs) in acquiring property in West Bengal?',
       answer:
         'Yes, our NRI Wealth Advisory desk handles FEMA compliance, NRE/NRO account repatriations, power of attorney (PoA) documentation, and remote site visit walk-throughs via secure video link.',
     },
     {
-      question: 'What are the typical brokerage or advisory charges?',
+      question: 'How do I pre-register or schedule an on-ground site visit?',
       answer:
-        'Our standard advisory fees follow standard market regulations: 1% to 2% for outright sale/purchase transactions and one month’s equivalent rent for commercial/residential leases. Complete fee transparency is agreed upon upfront.',
-    },
-    {
-      question: 'How do I schedule an on-ground physical site visit?',
-      answer:
-        'You can submit the site visit form below, contact our dedicated helpline, or click the WhatsApp button. A senior real estate consultant accompanied by a chauffeured private inspection vehicle will assist you.',
+        'You can submit the pre-registration form below, call our direct line at +91 7908880693, or message us on WhatsApp. Our regional desks in Kolkata (Salt Lake Sector 5) and Durgapur (Sepco) will coordinate your personalized tour.',
     },
   ];
 
@@ -163,12 +173,12 @@ const Realtor = () => {
     <div>
       {/* Page Hero */}
       <PageHero
-        badge="Real Estate & Advisory Division"
-        badgeClass="badge-realtor"
-        title="Curated Premium Realty & Trusted Wealth Management"
-        subtitle="Discover verified luxury residences, commercial office investments, and prime freehold plots backed by end-to-end legal title security."
-        bgImage="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80"
-        breadcrumbs={[{ name: 'Anubhuti Realtor', path: null }]}
+        badge="Real Estate Division • Coming Soon"
+        badgeClass="badge-gold"
+        title="Anubhuti Realtor — Coming Soon"
+        subtitle="Exclusive pre-launch portfolio of luxury heritage resort villas, gated freehold enclaves, and Grade-A commercial spaces across Kolkata (Salt Lake Sector 5) and Durgapur (Sepco). Pre-launch priority registration is now open."
+        bgImage="/images/realtor/heritage-resort-villa-night.jpg"
+        breadcrumbs={[{ name: 'Anubhuti Realtor (Coming Soon)', path: null }]}
       />
 
       {/* =========================================================================
@@ -207,7 +217,7 @@ const Realtor = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Golf Course Road, Gurugram"
+                    placeholder="e.g. Kolkata, Salt Lake Sector 5, Durgapur, Sepco"
                     value={searchLocation}
                     onChange={(e) => setSearchLocation(e.target.value)}
                   />
@@ -276,6 +286,277 @@ const Realtor = () => {
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          PRE-LAUNCH EXCLUSIVE SHOWCASE (NEW REAL ESTATE VENTURES)
+          ========================================================================= */}
+      <section className="section section-white" style={{ paddingTop: '1rem', paddingBottom: '3.5rem' }}>
+        <div className="container">
+          <SectionHeading
+            badge="Pre-Launch Priority Access"
+            badgeClass="badge-gold"
+            title="Anubhuti Realtor — Coming Soon to Kolkata & Durgapur"
+            subtitle="Introducing our forthcoming flagship luxury resort estates and gated freehold communities. Pre-register today for early-bird pricing and VIP site visit priority."
+          />
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+              gap: '2rem',
+              marginBottom: '2.5rem',
+            }}
+          >
+            {/* Showcase Card 1: Kolkata Heritage Villas */}
+            <div
+              className="card"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                border: '1.5px solid var(--border-accent)',
+              }}
+            >
+              <div style={{ position: 'relative', height: '300px', overflow: 'hidden' }}>
+                <img
+                  src="/images/realtor/heritage-resort-villa-night.jpg"
+                  alt="The Anubhuti Heritage Oasis & Luxury Resort Villas - Kolkata"
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.5s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                />
+                <span
+                  className="badge badge-gold"
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '1rem',
+                    margin: 0,
+                    backgroundColor: 'var(--accent)',
+                    color: 'var(--primary)',
+                    fontWeight: 800,
+                  }}
+                >
+                  COMING SOON • PRE-LAUNCH
+                </span>
+                <span
+                  className="badge badge-realtor"
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    margin: 0,
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    color: 'var(--primary)',
+                  }}
+                >
+                  Kolkata Hub
+                </span>
+              </div>
+              <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.6rem' }}>
+                  <MapPin size={15} color="var(--accent)" />
+                  <span>Salt Lake Sector 5, Kolkata, West Bengal</span>
+                </div>
+                <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                  The Anubhuti Heritage Oasis & Luxury Resort Villas
+                </h3>
+                <p style={{ color: 'var(--text)', fontSize: '0.94rem', lineHeight: 1.65, flex: 1, marginBottom: '1.25rem' }}>
+                  A private enclave of bespoke heritage resort villas featuring classic colonial arches, ambient warm night illumination, private manicured courtyards, landscaped greens, and exclusive club access.
+                </p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem',
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  <span className="badge badge-soft">4 & 5 BHK Villas</span>
+                  <span className="badge badge-soft">4,800 - 6,500 sq.ft</span>
+                  <span className="badge badge-soft">Private Lawns</span>
+                  <span className="badge badge-soft">24/7 Gated Security</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <a
+                    href="https://wa.me/917908880693?text=Hi%20Anubhuti%20Group,%20I%20am%20interested%20in%20pre-registering%20for%20The%20Anubhuti%20Heritage%20Resort%20Villas%20in%20Kolkata."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-gold btn-sm"
+                    style={{ flex: 1, minWidth: '160px', justifyContent: 'center' }}
+                  >
+                    <MessageCircle size={15} />
+                    <span>WhatsApp Priority</span>
+                  </a>
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-sm"
+                    style={{ flex: 1, minWidth: '160px', borderColor: 'var(--primary)', justifyContent: 'center' }}
+                    onClick={() => openQuoteModal('Realtor')}
+                  >
+                    <span>Pre-Register</span>
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Showcase Card 2: Durgapur Resort Estate */}
+            <div
+              className="card"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                border: '1.5px solid var(--border-accent)',
+              }}
+            >
+              <div style={{ position: 'relative', height: '300px', overflow: 'hidden' }}>
+                <img
+                  src="/images/realtor/resort-estate-aerial-pool.jpg"
+                  alt="The Grand Palm Resort Estate & Aquatic Enclave - Durgapur"
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.5s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                />
+                <span
+                  className="badge badge-gold"
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '1rem',
+                    margin: 0,
+                    backgroundColor: 'var(--accent)',
+                    color: 'var(--primary)',
+                    fontWeight: 800,
+                  }}
+                >
+                  COMING SOON • PRE-LAUNCH
+                </span>
+                <span
+                  className="badge badge-realtor"
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    margin: 0,
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    color: 'var(--primary)',
+                  }}
+                >
+                  Durgapur Hub
+                </span>
+              </div>
+              <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.6rem' }}>
+                  <MapPin size={15} color="var(--accent)" />
+                  <span>Sepco, Durgapur, West Bengal</span>
+                </div>
+                <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '0.75rem', lineHeight: 1.3 }}>
+                  The Grand Palm Resort Estate & Aquatic Enclave
+                </h3>
+                <p style={{ color: 'var(--text)', fontSize: '0.94rem', lineHeight: 1.65, flex: 1, marginBottom: '1.25rem' }}>
+                  Masterplanned luxury gated township showcasing an Olympic-size azure swimming pool, poolside pavilion cabanas, illuminated botanical garden walkways, and freehold residential plots and villas.
+                </p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem',
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  <span className="badge badge-soft">Residential Plots & Villas</span>
+                  <span className="badge badge-soft">3,200 - 7,500 sq.ft</span>
+                  <span className="badge badge-soft">Olympic Azure Pool</span>
+                  <span className="badge badge-soft">Clear Freehold Title</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <a
+                    href="https://wa.me/917908880693?text=Hi%20Anubhuti%20Group,%20I%20am%20interested%20in%20pre-registering%20for%20The%20Grand%20Palm%20Resort%20Estate%20in%20Durgapur."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-gold btn-sm"
+                    style={{ flex: 1, minWidth: '160px', justifyContent: 'center' }}
+                  >
+                    <MessageCircle size={15} />
+                    <span>WhatsApp Priority</span>
+                  </a>
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-sm"
+                    style={{ flex: 1, minWidth: '160px', borderColor: 'var(--primary)', justifyContent: 'center' }}
+                    onClick={() => openQuoteModal('Realtor')}
+                  >
+                    <span>Pre-Register</span>
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Pre-Launch Advisory Strip */}
+          <div
+            style={{
+              backgroundColor: 'var(--primary)',
+              color: 'var(--white)',
+              borderRadius: 'var(--radius-lg)',
+              padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1.5rem',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.35rem' }}>
+                <Clock size={18} color="var(--accent)" />
+                <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Pre-Launch Advisory Desk Open
+                </span>
+              </div>
+              <h4 style={{ color: 'var(--white)', fontSize: '1.35rem', margin: '0 0 0.35rem' }}>
+                Want Early-Bird Plot Allocation or Brochure Preview?
+              </h4>
+              <p style={{ color: '#BAC7C1', fontSize: '0.92rem', margin: 0 }}>
+                Speak directly with our senior real estate consultants across Kolkata and Durgapur.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a
+                href="tel:+917908880693"
+                className="btn btn-gold btn-md"
+                style={{ textDecoration: 'none' }}
+              >
+                <Phone size={16} />
+                <span>Call +91 7908880693</span>
+              </a>
+              <a
+                href="mailto:anubhutigroup@gmail.com"
+                className="btn btn-outline-white btn-md"
+                style={{ textDecoration: 'none' }}
+              >
+                <Mail size={16} />
+                <span>anubhutigroup@gmail.com</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

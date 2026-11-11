@@ -25,15 +25,18 @@ const Footer = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '1.25rem', fontSize: '0.9rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#BAC7C1' }}>
                 <Phone size={15} color="var(--accent)" />
-                <a href="tel:+918252109615" style={{ color: '#BAC7C1' }}>+91 8252109615</a>
+                <a href="tel:+917908880693" style={{ color: '#BAC7C1' }}>+91 7908880693</a>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#BAC7C1' }}>
                 <Mail size={15} color="var(--accent)" />
-                <a href="mailto:info@anubhutigroup.com" style={{ color: '#BAC7C1' }}>[info@anubhutigroup.com]</a>
+                <a href="mailto:anubhutigroup@gmail.com" style={{ color: '#BAC7C1' }}>anubhutigroup@gmail.com</a>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#BAC7C1' }}>
-                <MapPin size={15} color="var(--accent)" />
-                <span>[Anubhuti Corporate Tower, Level 8, Business Boulevard, NCR, India]</span>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#BAC7C1' }}>
+                <MapPin size={15} color="var(--accent)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                <span>
+                  <strong>Kolkata:</strong> Salt Lake Sector 5, Kolkata<br />
+                  <strong>Durgapur:</strong> Sepco, Durgapur, West Bengal
+                </span>
               </div>
             </div>
           </div>

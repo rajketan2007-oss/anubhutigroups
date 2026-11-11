@@ -49,7 +49,16 @@ const Interiors = () => {
   const filteredProjects =
     filter === 'All'
       ? projects
-      : projects.filter((p) => p.category.toLowerCase().includes(filter.toLowerCase()));
+      : projects.filter((p) => {
+          const cat = (p.category || '').toLowerCase();
+          const f = filter.toLowerCase();
+          if (cat.includes(f)) return true;
+          if (f.includes('atrium') && (cat.includes('atrium') || cat.includes('reception') || cat.includes('lounge'))) return true;
+          if (f.includes('suite') && (cat.includes('office') || cat.includes('boardroom') || cat.includes('cabin') || cat.includes('suite'))) return true;
+          if (f.includes('auditorium') && (cat.includes('auditorium') || cat.includes('classroom') || cat.includes('seminar') || cat.includes('court') || cat.includes('theater'))) return true;
+          if (f.includes('commercial') && (cat.includes('commercial') || cat.includes('cafeteria') || cat.includes('dining') || cat.includes('banking'))) return true;
+          return false;
+        });
 
   const interiorServices = [
     {
@@ -109,24 +118,24 @@ const Interiors = () => {
 
   const designStyles = [
     {
-      name: 'Modern Luxury',
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80',
-      desc: 'Clean architectural lines, bronze accents, concealed warm LED illumination, and premium Italian statuario marble.',
+      name: 'Double-Height Grand Atrium',
+      image: '/images/interiors/grand-atrium-lobby.jpg',
+      desc: 'Bespoke geometric marble floor inlays, bookmatched statuario wall panels, and cascading crystal chandeliers.',
     },
     {
-      name: 'Refined Minimalist',
-      image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80',
-      desc: 'Clutter-free serene spaces, monochromatic natural palettes, fluted oak millwork, and abundant natural daylighting.',
+      name: 'Ultra-Luxury Executive Lounge',
+      image: '/images/interiors/luxury-executive-lounge.jpg',
+      desc: 'Fluted stone pillars, warm vertical cove lights, round nero-marquina tables, and custom leather seating.',
     },
     {
-      name: 'Heritage Traditional',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-      desc: 'Handcrafted teak wood carvings, intricate brass inlays, rich silk textiles, and timeless Indian neoclassical warmth.',
+      name: 'High-Tech Corporate Boardroom',
+      image: '/images/interiors/executive-boardroom.jpg',
+      desc: '16-seater oak conference table, wireless AV integration, acoustic felt walls, and ergonomic mesh seating.',
     },
     {
-      name: 'Contemporary Biophilic',
-      image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
-      desc: 'Organic indoor green planters, tactile natural stone, woven cane furniture accents, and harmonious earth tones.',
+      name: 'Biophilic Corporate Reception',
+      image: '/images/interiors/corporate-welcome-lounge.jpg',
+      desc: 'Lush indoor bonsai planters, textured natural timber walls, and bright panoramic curtain glazing.',
     },
   ];
 
@@ -138,7 +147,7 @@ const Interiors = () => {
         badgeClass="badge-interiors"
         title="Transforming Spaces Into Refined Living Experiences"
         subtitle="From bespoke residential penthouses to elite corporate headquarters, Anubhuti Interiors merges ergonomic precision with handcrafted artisanal luxury."
-        bgImage="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80"
+        bgImage="/images/interiors/grand-atrium-lobby.jpg"
         breadcrumbs={[{ name: 'Anubhuti Interiors', path: null }]}
       />
 
@@ -238,7 +247,7 @@ const Interiors = () => {
               flexWrap: 'wrap',
             }}
           >
-            {['All', 'Living Room', 'Modular Kitchen', 'Office'].map((tab) => (
+            {['All', 'Corporate Atriums', 'Executive Suites', 'Auditoriums', 'Commercial Spaces'].map((tab) => (
               <button
                 key={tab}
                 type="button"
@@ -246,7 +255,7 @@ const Interiors = () => {
                 className={`btn btn-sm ${filter === tab ? 'btn-primary' : 'btn-soft'}`}
                 style={{ minWidth: '120px' }}
               >
-                {tab === 'All' ? 'All Spaces' : tab}
+                {tab === 'All' ? 'All Spaces (14)' : tab}
               </button>
             ))}
           </div>

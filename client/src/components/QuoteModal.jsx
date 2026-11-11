@@ -3,7 +3,7 @@ import { X, Send, CheckCircle2, AlertCircle, Loader2, MessageCircle } from 'luci
 import { useModal } from '../context/ModalContext';
 import { api } from '../services/api';
 
-const WHATSAPP_NUMBER = '918252109615';
+const WHATSAPP_NUMBER = '917908880693';
 
 const QuoteModal = () => {
   const { quoteModalOpen, quoteModalDivision, closeQuoteModal } = useModal();
@@ -153,7 +153,7 @@ ${formData.message.trim()}
             <CheckCircle2 size={54} color="var(--success)" style={{ margin: '0 auto 1rem' }} />
             <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>Consultation Request Submitted!</h4>
             <p style={{ color: 'var(--text)', fontSize: '0.95rem', marginBottom: '1.25rem' }}>
-              Thank you! Your quote request has been recorded. Tap below to send these exact details directly to our WhatsApp number <strong>8252109615</strong>.
+              Thank you! Your quote request has been recorded. Tap below to send these exact details directly to our WhatsApp number <strong>7908880693</strong>.
             </p>
 
             {whatsAppUrl && (
@@ -179,7 +179,7 @@ ${formData.message.trim()}
                   }}
                 >
                   <MessageCircle size={22} />
-                  <span>Open WhatsApp to Send Details (8252109615)</span>
+                  <span>Open WhatsApp to Send Details (7908880693)</span>
                 </a>
                 <p style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: '0.45rem' }}>
                   Click to open WhatsApp directly with all details pre-filled.

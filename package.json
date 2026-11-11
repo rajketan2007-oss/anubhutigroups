@@ -7,7 +7,7 @@
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm install && npm run build"
   },
   "keywords": [
     "mern",

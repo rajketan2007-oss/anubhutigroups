@@ -48,12 +48,28 @@ const PropertyCard = ({ property }) => {
           >
             {property.propertyType}
           </span>
-          <span
-            className="badge badge-gold"
-            style={{ margin: 0, backdropFilter: 'blur(4px)', backgroundColor: 'var(--primary)', color: 'var(--white)', borderColor: 'var(--accent)' }}
-          >
-            {property.purpose === 'Rent' ? 'FOR LEASE' : 'FOR SALE'}
-          </span>
+          {property.status === 'Coming Soon' ? (
+            <span
+              className="badge badge-gold"
+              style={{
+                margin: 0,
+                backdropFilter: 'blur(4px)',
+                backgroundColor: 'var(--accent)',
+                color: 'var(--primary)',
+                fontWeight: 800,
+                letterSpacing: '0.05em',
+              }}
+            >
+              COMING SOON
+            </span>
+          ) : (
+            <span
+              className="badge badge-gold"
+              style={{ margin: 0, backdropFilter: 'blur(4px)', backgroundColor: 'var(--primary)', color: 'var(--white)', borderColor: 'var(--accent)' }}
+            >
+              {property.purpose === 'Rent' ? 'FOR LEASE' : 'FOR SALE'}
+            </span>
+          )}
         </div>
 
         {/* Price Floating Overlay */}
@@ -143,7 +159,7 @@ const PropertyCard = ({ property }) => {
           style={{ width: '100%', borderColor: 'var(--primary)', minHeight: '44px' }}
           onClick={() => openQuoteModal('Realtor')}
         >
-          <span>Inquire & Schedule Site Visit</span>
+          <span>{property.status === 'Coming Soon' ? 'Pre-Register / Priority Enquiry' : 'Inquire & Schedule Site Visit'}</span>
           <ArrowRight size={14} />
         </button>
       </div>

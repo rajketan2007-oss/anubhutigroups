@@ -178,7 +178,7 @@ const Home = () => {
             <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: '220px', position: 'relative', overflow: 'hidden' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+                  src="/images/construction/commercial-glass-facade-tower.jpg"
                   alt="Anubhuti Construction"
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -220,13 +220,27 @@ const Home = () => {
             <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: '220px', position: 'relative', overflow: 'hidden' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
-                  alt="Anubhuti Realtor"
+                  src="/images/realtor/heritage-resort-villa-night.jpg"
+                  alt="Anubhuti Realtor - Luxury Heritage Resort Villa"
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <span className="badge badge-realtor" style={{ position: 'absolute', top: '1rem', left: '1rem', margin: 0 }}>
                   Real Estate Advisory
+                </span>
+                <span
+                  className="badge badge-gold"
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    margin: 0,
+                    backgroundColor: 'var(--accent)',
+                    color: 'var(--primary)',
+                    fontWeight: 800,
+                  }}
+                >
+                  Coming Soon
                 </span>
               </div>
               <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -237,7 +251,7 @@ const Home = () => {
                   </h3>
                 </div>
                 <p style={{ color: 'var(--text)', fontSize: '0.94rem', lineHeight: 1.65, flex: 1 }}>
-                  Strategic property brokerage and wealth advisory. Specialized in buying, selling, leasing premium residential villas, high-rise condominiums, and commercial Grade-A assets.
+                  <strong>Coming Soon!</strong> Strategic property brokerage and luxury estate development. Featuring verified heritage resort villas, gated enclaves, and Grade-A commercial assets across Kolkata (Salt Lake Sector 5) and Durgapur (Sepco). Pre-launch consultations now open.
                 </p>
                 <div style={{ paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
                   <Link
@@ -251,7 +265,7 @@ const Home = () => {
                       fontSize: '0.92rem',
                     }}
                   >
-                    <span>Browse Property Listings</span>
+                    <span>Explore Realtor Pre-Launch</span>
                     <ArrowRight size={16} color="var(--accent)" />
                   </Link>
                 </div>
@@ -262,7 +276,7 @@ const Home = () => {
             <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: '220px', position: 'relative', overflow: 'hidden' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+                  src="/images/interiors/grand-atrium-lobby.jpg"
                   alt="Anubhuti Interiors"
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}

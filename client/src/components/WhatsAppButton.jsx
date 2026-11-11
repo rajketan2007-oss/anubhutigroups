@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppButton = () => {
-  const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '918252109615';
+  const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917908880693';
   const textMessage = encodeURIComponent(
     'Hello Anubhuti Group, I would like to inquire about your Construction, Realty, or Interior services.'
   );

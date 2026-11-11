@@ -1,0 +1,34 @@
+========================================================================
+ ANUBHUTI GROUP OF COMPANIES - CPANEL DEPLOYMENT INSTRUCTIONS
+========================================================================
+
+HOW TO DEPLOY ON CPANEL (public_html):
+------------------------------------------------------------------------
+1. Login to your cPanel hosting account.
+2. In the "Files" section, click on "File Manager".
+3. Navigate into the "public_html" directory (or your subdomain directory).
+4. Click "Upload" from the top menu toolbar.
+5. Select and upload the zip file: "anubhuti-cpanel-public_html.zip".
+6. Once uploaded (100% green bar), go back to File Manager.
+7. Right-click on "anubhuti-cpanel-public_html.zip" and choose "Extract".
+8. Extract it directly into "public_html".
+9. (Optional) Make sure hidden files are visible in cPanel:
+   - Click "Settings" (top right of File Manager)
+   - Check "Show Hidden Files (dotfiles)"
+   - Click Save
+   - Verify that ".htaccess" is present in public_html.
+
+10. Open your domain in any browser (e.g., https://yourdomain.com).
+    Your website is now LIVE!
+
+FEATURES PRE-CONFIGURED:
+------------------------------------------------------------------------
+* .htaccess Apache rewrite rules for React Router DOM (no 404 on page refresh)
+* Priority Consultation & Get a Quote forms auto-forwarding to WhatsApp: +91 8252109615
+* Mobile responsive layout for all smartphones & tablets
+* Gzip compression & browser cache headers for fast loading
+* Built-in offline fallback store (works 100% standalone without needing a Node.js server)
+
+Support: Anubhuti Group of Companies
+========================================================================
+
