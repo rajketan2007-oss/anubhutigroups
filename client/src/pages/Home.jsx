@@ -18,6 +18,7 @@ import ProjectCard from '../components/ProjectCard';
 import TestimonialSlider from '../components/TestimonialSlider';
 import { useModal } from '../context/ModalContext';
 import { api } from '../services/api';
+import { fallbackProjects, fallbackTestimonials } from '../services/mockData';
 
 const Home = () => {
   const { openQuoteModal } = useModal();
@@ -37,10 +38,20 @@ const Home = () => {
           api.getProjects({ limit: 6, featured: 'true' }),
           api.getTestimonials({}),
         ]);
-        if (projRes.success) setFeaturedProjects(projRes.data);
-        if (testRes.success) setTestimonials(testRes.data);
+        if (projRes && projRes.success && Array.isArray(projRes.data) && projRes.data.length > 0) {
+          setFeaturedProjects(projRes.data);
+        } else {
+          setFeaturedProjects(fallbackProjects.filter((p) => p.isFeatured).slice(0, 6));
+        }
+        if (testRes && testRes.success && Array.isArray(testRes.data) && testRes.data.length > 0) {
+          setTestimonials(testRes.data);
+        } else {
+          setTestimonials(fallbackTestimonials);
+        }
       } catch (err) {
         console.error('Data fetch error:', err);
+        setFeaturedProjects(fallbackProjects.filter((p) => p.isFeatured).slice(0, 6));
+        setTestimonials(fallbackTestimonials);
       } finally {
         setLoading(false);
       }

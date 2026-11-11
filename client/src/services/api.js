@@ -14,9 +14,14 @@ const getHeaders = (token = null) => {
 };
 
 const handleResponse = async (res) => {
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error(data.message || `Request failed with status ${res.status}`);
+  // If the server returned HTML (e.g. SPA index.html from Vercel rewrite), treat as offline/unavailable
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error('Received non-JSON response from server (SPA fallback detected)');
+  }
+  const data = await res.json().catch(() => null);
+  if (!data || !res.ok || data.success === false) {
+    throw new Error(data?.message || `Request failed with status ${res.status}`);
   }
   return data;
 };
@@ -128,9 +133,13 @@ export const api = {
       const res = await fetch(`${BASE_URL}/properties${query ? `?${query}` : ''}`, {
         headers: getHeaders(),
       });
-      return await handleResponse(res);
+      const data = await handleResponse(res);
+      if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
+        throw new Error('Invalid property data structure, falling back to local catalog');
+      }
+      return data;
     } catch (err) {
-      console.warn('Backend server offline. Utilizing resilient frontend property catalog.');
+      console.warn('Backend server offline or unhandled. Utilizing resilient frontend property catalog.');
       let list = [...fallbackProperties];
 
       if (params.location && params.location !== 'All') {
@@ -229,15 +238,25 @@ export const api = {
       const res = await fetch(`${BASE_URL}/projects${query ? `?${query}` : ''}`, {
         headers: getHeaders(),
       });
-      return await handleResponse(res);
+      const data = await handleResponse(res);
+      if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
+        throw new Error('Invalid project data structure, falling back to local catalog');
+      }
+      return data;
     } catch (err) {
-      console.warn('Backend server offline. Utilizing resilient frontend project catalog.');
+      console.warn('Backend server offline or unhandled. Utilizing resilient frontend project catalog.');
       let list = [...fallbackProjects];
       if (params.division && params.division !== 'All') {
         list = list.filter((p) => p.division === params.division);
       }
       if (params.category && params.category !== 'All') {
         list = list.filter((p) => p.category === params.category);
+      }
+      if (params.featured === 'true' || params.featured === true) {
+        list = list.filter((p) => p.isFeatured);
+      }
+      if (params.limit) {
+        list = list.slice(0, parseInt(params.limit, 10));
       }
       return {
         success: true,
@@ -293,7 +312,11 @@ export const api = {
       const res = await fetch(`${BASE_URL}/testimonials${query ? `?${query}` : ''}`, {
         headers: getHeaders(),
       });
-      return await handleResponse(res);
+      const data = await handleResponse(res);
+      if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
+        throw new Error('Invalid testimonial data structure, falling back to local store');
+      }
+      return data;
     } catch (err) {
       let list = [...fallbackTestimonials];
       if (params.division && params.division !== 'All') {

@@ -16,6 +16,7 @@ import TestimonialSlider from '../components/TestimonialSlider';
 import ContactForm from '../components/ContactForm';
 import Loader from '../components/Loader';
 import { api } from '../services/api';
+import { fallbackProjects, fallbackTestimonials } from '../services/mockData';
 import { useModal } from '../context/ModalContext';
 
 const Interiors = () => {
@@ -35,10 +36,20 @@ const Interiors = () => {
           api.getProjects({ division: 'Interiors' }),
           api.getTestimonials({ division: 'Interiors' }),
         ]);
-        if (projRes.success) setProjects(projRes.data);
-        if (testRes.success) setTestimonials(testRes.data);
+        if (projRes && projRes.success && Array.isArray(projRes.data) && projRes.data.length > 0) {
+          setProjects(projRes.data);
+        } else {
+          setProjects(fallbackProjects.filter((p) => p.division === 'Interiors'));
+        }
+        if (testRes && testRes.success && Array.isArray(testRes.data) && testRes.data.length > 0) {
+          setTestimonials(testRes.data);
+        } else {
+          setTestimonials(fallbackTestimonials.filter((t) => t.division === 'Interiors' || t.division === 'Group'));
+        }
       } catch (err) {
         console.error('Interiors fetch error:', err);
+        setProjects(fallbackProjects.filter((p) => p.division === 'Interiors'));
+        setTestimonials(fallbackTestimonials.filter((t) => t.division === 'Interiors' || t.division === 'Group'));
       } finally {
         setLoading(false);
       }

@@ -26,6 +26,10 @@ const ProjectCard = ({ project }) => {
           src={project.imageUrl}
           alt={project.title}
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1200&q=80';
+          }}
           style={{
             width: '100%',
             height: '100%',

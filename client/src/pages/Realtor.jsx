@@ -28,6 +28,7 @@ import ContactForm from '../components/ContactForm';
 import Loader from '../components/Loader';
 import { useModal } from '../context/ModalContext';
 import { api } from '../services/api';
+import { fallbackProperties } from '../services/mockData';
 
 const Realtor = () => {
   const { openQuoteModal } = useModal();
@@ -59,13 +60,20 @@ const Realtor = () => {
       if (searchPurpose !== 'All') params.purpose = searchPurpose;
 
       const res = await api.getProperties(params);
-      if (res.success) {
+      if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
         setProperties(res.data);
         setTotal(res.total);
         setPages(res.pages);
+      } else {
+        setProperties(fallbackProperties);
+        setTotal(fallbackProperties.length);
+        setPages(1);
       }
     } catch (err) {
       console.error('Property fetch error:', err);
+      setProperties(fallbackProperties);
+      setTotal(fallbackProperties.length);
+      setPages(1);
     } finally {
       setLoading(false);
     }

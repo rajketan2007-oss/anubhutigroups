@@ -20,6 +20,10 @@ const PropertyCard = ({ property }) => {
           src={property.imageUrl}
           alt={property.title}
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80';
+          }}
           style={{
             width: '100%',
             height: '100%',

@@ -18,6 +18,7 @@ import FAQAccordion from '../components/FAQAccordion';
 import ContactForm from '../components/ContactForm';
 import Loader from '../components/Loader';
 import { api } from '../services/api';
+import { fallbackProjects } from '../services/mockData';
 import { useModal } from '../context/ModalContext';
 
 const Construction = () => {
@@ -33,11 +34,14 @@ const Construction = () => {
     const fetchProjects = async () => {
       try {
         const res = await api.getProjects({ division: 'Construction' });
-        if (res.success) {
+        if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
           setProjects(res.data);
+        } else {
+          setProjects(fallbackProjects.filter((p) => p.division === 'Construction'));
         }
       } catch (err) {
         console.error('Construction projects fetch error:', err);
+        setProjects(fallbackProjects.filter((p) => p.division === 'Construction'));
       } finally {
         setLoading(false);
       }
