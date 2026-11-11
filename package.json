@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Production MERN Stack Application for Anubhuti Group of Companies",
   "scripts": {
+    "start": "node server/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "client": "cd client && npm run dev",

@@ -146,35 +146,6 @@ export const sampleProperties = [
     createdAt: new Date('2025-03-10')
   }
 ];
-    isFeatured: true,
-    status: 'Available',
-    createdAt: new Date('2025-03-05')
-  },
-  {
-    _id: 'prop-006',
-    title: 'Vistara Prime Retail Showroom',
-    description: 'High-footfall ground-floor retail showroom unit on main arterial highway with 40-foot glass frontage and dedicated customer valet parking. [Sample Property Listing]',
-    price: '₹6.20 Cr',
-    priceNumeric: 62000000,
-    location: 'MG Road Metro Corridor',
-    city: 'Gurugram',
-    propertyType: 'Commercial',
-    purpose: 'Buy',
-    bhk: 'Retail Showroom',
-    area: '2,100 sq.ft',
-    areaNumeric: 2100,
-    bedrooms: 0,
-    bathrooms: 2,
-    features: ['High Footfall', 'Glass Frontage', 'Valet Parking', 'Prominent Signage Rights', 'Main Road Facing'],
-    imageUrl: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80'
-    ],
-    isFeatured: false,
-    status: 'Available',
-    createdAt: new Date('2025-03-10')
-  }
-];
 
 export const sampleProjects = [
   // Construction Projects
